@@ -1,10 +1,13 @@
 // components/AttractionPopup.jsx
+'use client';
 import { Box, Typography, Button } from '@mui/material';
 import CldImage from './CldImage';
+import { getPublicIdFromUrl } from '../middleware/middleware';
+import Link from 'next/link';
 import { Popup } from 'react-map-gl';
 
 const AttractionPopUp = ({ popupInfo, handleClosePopup }) => {
-    const publicId = popupInfo.imgUrl.split('/').slice(-2).join('/').split('.')[0];
+    const publicId = getPublicIdFromUrl(popupInfo.imgUrl);
 
     return (
         <Popup
@@ -28,9 +31,11 @@ const AttractionPopUp = ({ popupInfo, handleClosePopup }) => {
                 </Box>
                 <Typography variant="h6" className="font-semibold">{popupInfo.place}</Typography>
                 <Typography variant="body2" className="text-gray-600">{popupInfo.category}</Typography>
-                <Button variant="contained" color="primary" className="mt-2">
-                    More Info
-                </Button>
+                <Link href={`/attractions/${popupInfo._id}`}>
+                    <Button variant="contained" color="primary" className="mt-2">
+                        More Info
+                    </Button>
+                </Link>
             </Box>
         </Popup>
     );
