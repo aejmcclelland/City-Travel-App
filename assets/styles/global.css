@@ -8,7 +8,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -16,14 +16,11 @@
   }
 }
 
+
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: white;
+  font-size: 1rem;
 }
 
 @layer utilities {
@@ -31,3 +28,18 @@ body {
     text-wrap: balance;
   }
 }
+.map-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+ 
+}
+  .shadow-custom {
+    box-shadow:  1px 2px 2px hsla(240, 1%, 26%, 0.333),
+      2px 4px 4px hsla(240, 1%, 66%, 0.333),
+      3px 6px 6px hsla(240, 1%, 66%, 0.333);
+  }
+

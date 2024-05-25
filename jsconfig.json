@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
-  }
+  },
+  "include": [
+    "**/*",
+    "/Users/andrewmcclelland/Documents/next-api/london-travel/app/pages/page.jsx"
+  ]
 }
