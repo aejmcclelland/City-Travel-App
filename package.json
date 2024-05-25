@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.19.0",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.18",
     "cloudinary-react": "^1.8.1",
     "mapbox-gl": "^3.3.0",
     "mongoose": "^8.3.4",

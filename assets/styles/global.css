@@ -16,7 +16,6 @@
   }
 }
 
-
 body {
   color: rgb(var(--foreground-rgb));
   background: white;
@@ -42,4 +41,21 @@ body {
       2px 4px 4px hsla(240, 1%, 66%, 0.333),
       3px 6px 6px hsla(240, 1%, 66%, 0.333);
   }
+/* for popup button */
+.mapboxgl-popup-close-button {
+    width: 24px;
+    height: 24px;
+    top: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 12px;
+    color: #000000;
+    font-size: 18px;
+    line-height: 24px;
+}
 
+.mapboxgl-popup-close-button:hover {
+    background-color: #f0f0f0;
+    color: #ff0000;
+}
