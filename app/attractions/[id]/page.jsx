@@ -4,15 +4,20 @@ import CldImage from '@/components/CldImage';
 import { getPublicIdFromUrl } from '@/middleware/middleware';
 import { FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
+import dayjs from 'dayjs';
+
+const formatPrice = (priceInPence) => {
+    return (priceInPence / 100).toFixed(2);
+};
 
 export const AttractionPage = async ({ params }) => {
 
     await connectDB();
 
     let attraction = null;
-    const londonAttraction = await London.findOne({ _id: params.id }).lean();
-    const belfastAttraction = await Belfast.findOne({ _id: params.id }).lean();
-    const parisAttraction = await Paris.findOne({ _id: params.id }).lean();
+    const londonAttraction = await London.findOne({ _id: params.id }).lean({ virtuals: true });
+    const belfastAttraction = await Belfast.findOne({ _id: params.id }).lean({ virtuals: true });
+    const parisAttraction = await Paris.findOne({ _id: params.id }).lean({ virtuals: true });
 
     if (londonAttraction) {
         attraction = londonAttraction;
@@ -30,7 +35,8 @@ export const AttractionPage = async ({ params }) => {
         );
     }
     const publicId = getPublicIdFromUrl(attraction.imgUrl);
-    const { place, category, description, address, opening_time, closing_time, adult_ticket, child_ticket } = attraction;
+    const { place, category, description, address, formattedOpeningTime, formattedClosingTime, adult_ticket, child_ticket } = attraction;
+    console.log(formattedClosingTime);
     return (
         <div className="p-4 max-w-lg mx-auto bg-white rounded-lg shadow-lg">
             <CldImage
@@ -44,10 +50,10 @@ export const AttractionPage = async ({ params }) => {
             <p className="text-gray-600 mt-2">{category}</p>
             <p className="mt-4">{description}</p>
             <p className="mt-4"><strong>Address:</strong> {address}</p>
-            <p className="mt-2"><strong>Opening Time:</strong> {opening_time}</p>
-            <p className="mt-2"><strong>Closing Time:</strong> {closing_time}</p>
-            <p className="mt-2"><strong>Adult Ticket:</strong> £{adult_ticket}</p>
-            <p className="mt-2"><strong>Child Ticket:</strong> £{child_ticket}</p>
+            <p className="mt-2"><strong>Opening Time:</strong> {formattedOpeningTime}</p>
+            <p className="mt-2"><strong>Closing Time:</strong> {formattedClosingTime}</p>
+            <p className="mt-2"><strong>Adult Ticket:</strong> {adult_ticket === 0 ? 'Free Entry' : `£${formatPrice(adult_ticket)}`}</p>
+            <p className="mt-2"><strong>Child Ticket:</strong> {child_ticket === 0 ? 'Free Entry' : `£${formatPrice(child_ticket)}`}</p>
             <section>
                 <div className='container m-auto py-6 px-6'>
                     <Link
