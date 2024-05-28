@@ -4,7 +4,7 @@ import CldImage from '@/components/CldImage';
 import { getPublicIdFromUrl } from '@/middleware/middleware';
 import { FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
-import dayjs from 'dayjs';
+import { formatTime, formatTimeRange, getTimeStatus } from '@/utils/timeUtils';
 
 const formatPrice = (priceInPence) => {
     return (priceInPence / 100).toFixed(2);
@@ -35,8 +35,12 @@ export const AttractionPage = async ({ params }) => {
         );
     }
     const publicId = getPublicIdFromUrl(attraction.imgUrl);
-    const { place, category, description, address, formattedOpeningTime, formattedClosingTime, adult_ticket, child_ticket } = attraction;
-    console.log(formattedClosingTime);
+    const { place, category, description, address, opening_time, closing_time, adult_ticket, child_ticket } = attraction;
+
+    const timeRange = formatTimeRange(opening_time, closing_time);
+    const closingStatus = getTimeStatus(closing_time);
+
+
     return (
         <div className="p-4 max-w-lg mx-auto bg-white rounded-lg shadow-lg">
             <CldImage
@@ -50,8 +54,8 @@ export const AttractionPage = async ({ params }) => {
             <p className="text-gray-600 mt-2">{category}</p>
             <p className="mt-4">{description}</p>
             <p className="mt-4"><strong>Address:</strong> {address}</p>
-            <p className="mt-2"><strong>Opening Time:</strong> {formattedOpeningTime}</p>
-            <p className="mt-2"><strong>Closing Time:</strong> {formattedClosingTime}</p>
+            <p className="mt-2"><strong>Opening Hours:</strong> {timeRange}</p>
+            {closingStatus && <p className="mt-2 text-red-500">{closingStatus}</p>}
             <p className="mt-2"><strong>Adult Ticket:</strong> {adult_ticket === 0 ? 'Free Entry' : `£${formatPrice(adult_ticket)}`}</p>
             <p className="mt-2"><strong>Child Ticket:</strong> {child_ticket === 0 ? 'Free Entry' : `£${formatPrice(child_ticket)}`}</p>
             <section>

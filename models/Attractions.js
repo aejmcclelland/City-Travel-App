@@ -1,5 +1,4 @@
 import { Schema, model, models } from 'mongoose';
-import dayjs from 'dayjs';
 //const geocoder = require('../utils/geocoder');
 const opts = { toJSON: { virtuals: true } };
 
@@ -39,15 +38,9 @@ const attractionSchema = new Schema(
 		},
 		opening_time: {
 			type: Number,
-			get: (v) => formatTime(v),
 		},
-		closing_time: { type: Number, get: (v) => formatTime(v) },
-		last_entry: {
-			type: Number,
-			get: function (time) {
-				return formatTime(time);
-			},
-		},
+		closing_time: { type: Number },
+		last_entry: { type: Number },
 		adult_ticket: {
 			type: Number,
 			get: (v) => (v / 100).toFixed(2), //take Number var, divide by 100 return the result to 2 decimal places
@@ -111,34 +104,7 @@ attractionSchema.pre('save', async function (next) {
 	//Do not save address in DB
 	this.address = undefined;
 	next();
-
-	// Define virtuals for opening and closing times
-	attractionSchema.virtual('formattedOpeningTime').get(function () {
-		return dayjs(this.opening_time.toString().padStart(4, '0'), 'HHmm').format(
-			'hh:mm A'
-		);
-	});
-
-	attractionSchema.virtual('formattedClosingTime').get(function () {
-		return dayjs(this.closing_time.toString().padStart(4, '0'), 'HHmm').format(
-			'hh:mm A'
-		);
-	});
-	//format time
-	function formatTime(time) {
-		const hours = Math.floor(time / 100);
-		const minutes = time % 100;
-		return `${padZero(hours)}:${padZero(minutes)}`;
-	}
-
-	function padZero(num) {
-		return num.padStart(2, '0');
-	}
 });
-
-// Enable virtuals when converting documents to JSON or Object
-attractionSchema.set('toObject', { virtuals: true });
-attractionSchema.set('toJSON', { virtuals: true });
 
 const London = models.London || model('London', attractionSchema, 'London');
 const Belfast = models.Belfast || model('Belfast', attractionSchema, 'Belfast');
