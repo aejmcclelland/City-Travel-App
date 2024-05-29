@@ -26,7 +26,7 @@ export const getTimeStatus = (closingTime) => {
 	console.log('Formatted Closing Time:', formattedClosingTime.format('h:mm A'));
 
 	if (currentTime.isAfter(formattedClosingTime)) {
-		return 'Closed';
+		return 'Currently Closed';
 	} else if (formattedClosingTime.diff(currentTime, 'minute') <= 60) {
 		return 'Closing in the next hour';
 	}
