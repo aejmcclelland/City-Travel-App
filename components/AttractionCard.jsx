@@ -21,38 +21,40 @@ const AttractionCard = ({ attraction }) => {
     const publicId = attraction.imgUrl.split('/').slice(-2).join('/').split('.')[0];
 
     return (
-        <div className='rounded-xl shadow-md relative'>
-            <CldImage
-                publicId={publicId}
-                alt=''
-                className='w-full h-auto object-cover rounded-t-xl'
-            />
-            <div className='p-4'>
-                <div className='text-left md:text-center lg:text-left mb-6'>
-                    <div className='text-gray-600'>{attraction.place}</div>
-                    <h3 className='text-xl font-bold'>{attraction.category}</h3>
+        <Link href={`/attractions/${attraction._id}`}>
+            <div className='rounded-xl shadow-md relative'>
+                <CldImage
+                    publicId={publicId}
+                    alt=''
+                    className='w-full h-auto object-cover rounded-t-xl'
+                />
+                <div className='p-4'>
+                    <div className='text-left md:text-center lg:text-left mb-6'>
+                        <div className='text-gray-600'>{attraction.place}</div>
+                        <h3 className='text-xl font-bold'>{attraction.category}</h3>
+                    </div>
+                    <h3 className='absolute top-[10px] right-[10px] bg-white px-4 py-2 rounded-lg text-red-500 font-bold text-right md:text-center lg:text-right'>
+                        {formatTicketPrice(attraction.adult_ticket)}
+                    </h3>
+
+                    <div className='flex justify-left gap-4 text-gray-500 mb-4'>
+                        <p>
+                            <FaCoffee className='sm: inline md:inline lg:inline text-blue-600 mr-2' /> {attraction.cafe}
+                            <span className='md:hidden lg:inline'> Cafe</span>
+                        </p>
+
+                    </div>
+                    <div className='flex justify-left gap-4 text-gray-500 mb-4'>
+                        <p>
+                            <FaLandmark className='sm: inline md:inline lg:inline text-blue-600 lg:inline mr-2' /> {attraction.description}
+
+                            <span className='lg:inline'> Description</span>
+                        </p>
+                    </div>
+
                 </div>
-                <h3 className='absolute top-[10px] right-[10px] bg-white px-4 py-2 rounded-lg text-red-500 font-bold text-right md:text-center lg:text-right'>
-                    {formatTicketPrice(attraction.adult_ticket)}
-                </h3>
-
-                <div className='flex justify-left gap-4 text-gray-500 mb-4'>
-                    <p>
-                        <FaCoffee className='sm: inline md:inline lg:inline text-blue-600 mr-2' /> {attraction.cafe}
-                        <span className='md:hidden lg:inline'> Cafe</span>
-                    </p>
-
-                </div>
-                <div className='flex justify-left gap-4 text-gray-500 mb-4'>
-                    <p>
-                        <FaLandmark className='sm: inline md:inline lg:inline text-blue-600 lg:inline mr-2' /> {attraction.description}
-
-                        <span className='lg:inline'> Description</span>
-                    </p>
-                </div>
-
             </div>
-        </div>
+        </Link>
     );
 }
 

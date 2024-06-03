@@ -28,3 +28,5 @@ const AttractionsPage = async () => {
 }
 
 export default AttractionsPage;
+
+

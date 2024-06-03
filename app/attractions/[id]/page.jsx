@@ -1,9 +1,9 @@
+
 import connectDB from '@/config/database';
 import { London, Belfast, Paris } from '@/models/Attractions';
 import CldImage from '@/components/CldImage';
 import { getPublicIdFromUrl } from '@/middleware/middleware';
-import { FaArrowLeft } from 'react-icons/fa';
-import Link from 'next/link';
+import BackLink from '@/components/BackLink';
 import { formatTime, formatTimeRange, getTimeStatus } from '@/utils/timeUtils';
 
 const formatPrice = (priceInPence) => {
@@ -58,16 +58,7 @@ export const AttractionPage = async ({ params }) => {
             {closingStatus && <p className="mt-2 text-red-500">{closingStatus}</p>}
             <p className="mt-2"><strong>Adult Ticket:</strong> {adult_ticket === 0 ? 'Free Entry' : `£${formatPrice(adult_ticket)}`}</p>
             <p className="mt-2"><strong>Child Ticket:</strong> {child_ticket === 0 ? 'Free Entry' : `£${formatPrice(child_ticket)}`}</p>
-            <section>
-                <div className='container m-auto py-6 px-6'>
-                    <Link
-                        href='/map'
-                        className='text-blue-500 hover:text-blue-600 flex items-center'
-                    >
-                        <FaArrowLeft className='mr-2' /> Back to Map
-                    </Link>
-                </div>
-            </section>
+            <BackLink defaultBackPath="/attractions" />
         </div>
     );
 };

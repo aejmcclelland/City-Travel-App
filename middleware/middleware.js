@@ -1,3 +1,4 @@
+//middleware/middleware.js
 export { auth as middleware } from '@/auth';
 
 // Path: utils/convertToSerializeableObject.js
