@@ -2,6 +2,7 @@ import CityMap from '@/components/CityMap';
 import connectDB from '@/config/database';
 import { London, Belfast, Paris } from '@/models/Attractions';
 
+
 export const MapPage = async () => {
   await connectDB();
 
