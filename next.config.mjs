@@ -28,6 +28,7 @@ const nextConfig = {
 	// and the following to enable top-level await support for Webpack
 	webpack: (config) => {
 		config.experiments = {
+			layers: true,
 			topLevelAwait: true,
 		};
 		return config;
