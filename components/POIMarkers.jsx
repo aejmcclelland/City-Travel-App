@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from 'react';
-import MarkerComponent from './MarkerComponent';
+import MarkerComponent from '../components/MarkerComponent';
 
 const POIMarkers = ({ attractions, onMarkerClick }) => {
     useEffect(() => {

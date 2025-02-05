@@ -4,7 +4,7 @@ import { Box, Typography, Button } from '@mui/material';
 import CldImage from './CldImage';
 import { getPublicIdFromUrl } from '../middleware/middleware';
 import Link from 'next/link';
-import { Popup } from 'react-map-gl';
+import Popup from 'react-map-gl/dist/es5/components/Popup';
 
 const AttractionPopUp = ({ popupInfo, handleClosePopup }) => {
     const publicId = getPublicIdFromUrl(popupInfo.imgUrl);

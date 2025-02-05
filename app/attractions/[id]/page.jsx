@@ -1,10 +1,10 @@
 
-import connectDB from '@/config/database';
-import { London, Belfast, Paris } from '@/models/Attractions';
-import CldImage from '@/components/CldImage';
-import { getPublicIdFromUrl } from '@/middleware/middleware';
-import BackLink from '@/components/BackLink';
-import { formatTime, formatTimeRange, getTimeStatus } from '@/utils/timeUtils';
+import connectDB from '../../../config/database';
+import { London, Belfast, Paris } from '../../../models/Attractions';
+import CldImage from '../../../components/CldImage';
+import { getPublicIdFromUrl } from '../../../middleware/middleware';
+import BackLink from '../../../components/BackLink';
+import { formatTime, formatTimeRange, getTimeStatus } from '../../../utils/timeUtils';
 
 const formatPrice = (priceInPence) => {
     return (priceInPence / 100).toFixed(2);

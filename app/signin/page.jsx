@@ -1,6 +1,6 @@
 
-import { providerMap } from "@/auth.ts"
-import SignIn from "@/components/signin"
+import { providerMap } from '../../auth';
+import SignIn from '../../components/SignIn';
 
 export default async function SignInPage() {
   return (

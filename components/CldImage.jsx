@@ -1,6 +1,6 @@
 'use client';
 import React from 'react'
-import { Image, Transformation } from 'cloudinary-react';
+import { Image, Transformation } from 'next-cloudinary';
 
 const CldImage = ({ publicId, width, height, alt, className }) => {
     return (

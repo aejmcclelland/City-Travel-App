@@ -1,6 +1,6 @@
 import '../assets/styles/global.css';
 import { NavBar } from '../components/NavBar';
-import AuthProvider from '@/components/AuthProvider';
+import AuthProvider from '../components/authProvider';
 
 export const metadata = {
 	title: 'London Travel App',

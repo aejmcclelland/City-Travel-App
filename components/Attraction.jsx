@@ -1,5 +1,5 @@
 'use client';
-import AttractionCard from "./AttractionCard";
+import AttractionCard from '../components/AttractionCard';
 
 const Attraction = ({ attractions }) => {
     return (

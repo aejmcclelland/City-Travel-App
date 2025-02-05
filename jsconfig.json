@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ] // Maps "@/something" to "./src/something"
     }
   },
   "include": [
-    "**/*",
-    "/Users/andrewmcclelland/Documents/next-api/london-travel/app/pages/page.jsx"
-  ]
+    "src",
+    "app",
+    "components",
+    "pages"
+, "lib"  ]
 }

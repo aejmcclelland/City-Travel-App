@@ -1,8 +1,8 @@
 // Code: attractions page
-import Attractions from '@/components/Attraction';
-import { London, Belfast, Paris } from '@/models/Attractions';
-import connectDB from '@/config/database';
-import { convertToSerializeableObject } from '@/utils/convertToObject';
+import Attractions from '../../components/Attraction';
+import { London, Belfast, Paris } from '../../models/Attractions';
+import connectDB from '../../config/database';
+import { convertToSerializeableObject } from '../../utils/convertToObject';
 
 const AttractionsPage = async () => {
     await connectDB();

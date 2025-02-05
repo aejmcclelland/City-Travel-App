@@ -1,48 +1,13 @@
-// import NextAuth from 'next-auth';
-// import Google from 'next-auth/providers/google';
-// import Credentials from 'next-auth/providers/credentials';
-// import type { Provider } from 'next-auth/providers';
-
-// const providers: Provider[] = [
-// 	Google,
-// 	Credentials({
-// 		credentials: { password: { label: 'Password', type: 'password' } },
-// 		authorize(c) {
-// 			if (c.password !== 'password') return null;
-// 			return {
-// 				id: 'test',
-// 				name: 'Test User',
-// 				email: 'test@example.com',
-// 			};
-// 		},
-// 	}),
-// ];
-
-// export const providerMap = providers.map((provider) => {
-// 	if (typeof provider === 'function') {
-// 		const providerData = provider();
-// 		return { id: providerData.id, name: providerData.name };
-// 	} else {
-// 		return { id: provider.id, name: provider.name };
-// 	}
-// });
-
-// export const config = {
-// 	providers: [Google],
-// 	pages: {
-// 		signIn: '/signin',
-// 		signOut: '/attractions',
-// 	},
-// };
-
-// export const { handlers, auth, signIn, signOut } = NextAuth(config);
-
-import NextAuth from 'next-auth';
+import NextAuth, { type NextAuthConfig } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { NextApiRequest, NextApiResponse } from 'next';
 
-const options = {
-	providers: [GoogleProvider],
+export const authOptions: NextAuthConfig = {
+	providers: [
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID!,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+		}),
+	],
 	pages: {
 		signIn: '/signin',
 		signOut: '/signout',
@@ -50,7 +15,6 @@ const options = {
 	},
 	callbacks: {
 		async signIn({ user, account, profile, email, credentials }) {
-			// Add your sign-in logic here
 			return true;
 		},
 		async redirect({ url, baseUrl }) {
@@ -63,15 +27,12 @@ const options = {
 			return token;
 		},
 	},
-	// Configure session strategy
 	session: {
 		strategy: 'jwt',
 	},
-	// Enable debug messages in the console if you are having problems
 	debug: process.env.NODE_ENV === 'development',
 };
-// Assign the handler function to a variable
-const authHandler = (req: NextApiRequest, res: NextApiResponse) => NextAuth;
 
-// Export the handler variable
-export default authHandler;
+// ✅ Correctly export `handler` instead of `handlers`
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
